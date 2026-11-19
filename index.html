@@ -1,161 +1,99 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rapid Relief — Interactive Script</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapid Relief — Guided Interactive Script</title>
 <style>
-:root{--navy:#10263b;--navy2:#17344d;--navy3:#21445d;--teal:#2cb7a5;--teal2:#dff6f1;--ink:#172b3b;--muted:#64788a;--line:#d8e2e9;--paper:#f3f6f8;--white:#fff;--gold:#d6a84f;--shadow:0 12px 32px rgba(16,38,59,.10)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.55}
-button{font:inherit;cursor:pointer}.topbar{background:var(--navy);color:#fff;padding:18px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 4px 18px rgba(16,38,59,.18)}
-.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(145deg,#35c2ae,#187d83);display:grid;place-items:center;font-weight:900;color:#fff;letter-spacing:-1px}.brand-title{font-size:17px;font-weight:750;letter-spacing:.1px}.brand-sub{font-size:11px;color:#b8cad6;letter-spacing:1.4px;text-transform:uppercase}.top-actions{display:flex;gap:9px;align-items:center}.reset{border:1px solid #557187;background:#1b3a52;color:#fff;padding:9px 13px;border-radius:9px;font-size:12px;font-weight:700}.reset:hover{background:#294d67}
-.shell{max-width:1240px;margin:0 auto;padding:24px 22px 44px;display:grid;grid-template-columns:245px minmax(0,1fr);gap:22px}.sidebar{align-self:start;position:sticky;top:18px;background:var(--navy);border-radius:15px;padding:17px 13px;color:#fff;box-shadow:var(--shadow)}.side-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#91a9ba;font-weight:800;padding:2px 10px 12px}.nav-btn{display:flex;width:100%;align-items:center;gap:10px;text-align:left;border:1px solid transparent;background:transparent;color:#d9e5ec;border-radius:9px;padding:11px 10px;margin:3px 0;font-size:13px;font-weight:650}.nav-btn .num{width:23px;height:23px;display:grid;place-items:center;border-radius:7px;background:#25455d;color:#c5d6e0;font-size:11px}.nav-btn:hover{background:#1a3b54}.nav-btn.active{background:#e7f5f3;color:var(--navy);border-color:#c5e9e3}.nav-btn.active .num{background:var(--teal);color:#fff}.sidebar-note{border-top:1px solid #315068;margin:16px 8px 0;padding:13px 2px 0;color:#a9bdca;font-size:11px}
-.content{min-width:0}.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:2px 2px 17px}.eyebrow{font-size:10px;letter-spacing:1.7px;text-transform:uppercase;color:#718696;font-weight:800}.page-head h1{margin:4px 0 0;font-size:25px;line-height:1.2;color:var(--navy);letter-spacing:-.5px}.page-count{font-size:11px;color:#73889a;background:#e8eef2;border:1px solid #dbe4e9;border-radius:30px;padding:6px 10px;white-space:nowrap}
-.panel{display:none;background:transparent}.panel.active{display:block}.no-js .panel{display:block;margin-bottom:24px}.no-js .sidebar{position:static}.no-js .nav-btn{display:none}.no-js .reveal{display:block!important}
-.script-card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:21px 22px;margin:0 0 14px;box-shadow:0 5px 18px rgba(16,38,59,.045)}.script-card h2{font-size:15px;color:var(--navy);margin:0 0 14px;letter-spacing:-.1px}.script-card h3{font-size:12px;color:#456176;margin:18px 0 8px;text-transform:uppercase;letter-spacing:1px}.script-line{padding:12px 14px;border-radius:10px;background:#f5f8fa;border:1px solid #e5edf1;margin:8px 0;font-size:14px;color:#263e50}.script-line.agent{border-left:3px solid var(--teal)}.script-line.client{border-left:3px solid #9aabb8;background:#f8fafb}.speaker{display:block;font-size:9px;letter-spacing:1.2px;font-weight:850;color:#6d8292;margin-bottom:4px}.script-line p{margin:0}.plain-line{font-size:14px;margin:10px 0;color:#263e50}.branch-box{border:1px solid #d8e5eb;background:#f8fbfc;border-radius:12px;padding:15px;margin:14px 0}.branch-title{font-size:12px;font-weight:800;color:var(--navy);margin-bottom:10px}.choice-row{display:flex;flex-wrap:wrap;gap:8px}.choice{border:1px solid #c8d8e1;background:#fff;color:#25465d;border-radius:9px;padding:9px 12px;font-size:12px;font-weight:750;transition:.15s}.choice:hover{border-color:var(--teal);background:#edf9f7}.choice.primary{background:var(--navy);color:#fff;border-color:var(--navy)}.choice.primary:hover{background:#21445d}.reveal{display:none;margin-top:12px;padding:13px 14px;background:#eaf7f4;border:1px solid #bce5dc;border-radius:10px;color:#214b4c;font-size:13px}.reveal p{margin:0 0 8px}.reveal p:last-child{margin-bottom:0}.route-link{display:inline-flex;align-items:center;margin-top:10px;padding:7px 10px;border-radius:8px;border:1px solid #91cfc3;background:#fff;color:#17665e;font-size:11px;font-weight:800}.section-footer{display:flex;justify-content:space-between;gap:10px;margin:18px 0 0}.footer-btn{border:1px solid #cbd9e1;background:#fff;color:#36556b;border-radius:9px;padding:10px 14px;font-size:12px;font-weight:750}.footer-btn.next{background:var(--navy);color:#fff;border-color:var(--navy)}.footer-btn:disabled{opacity:.35;cursor:not-allowed}.small-note{font-size:11px;color:#788d9d;margin-top:9px}
-@media(max-width:800px){.shell{grid-template-columns:1fr;padding:15px 13px 30px;gap:14px}.sidebar{position:static;padding:12px}.side-label{padding-bottom:8px}.sidebar nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.nav-btn{margin:0;padding:9px 8px;font-size:12px}.sidebar-note{display:none}.page-head h1{font-size:22px}.script-card{padding:17px 15px}.topbar{padding:14px 15px}.brand-title{font-size:15px}.reset{padding:8px 10px}.section-footer{position:sticky;bottom:8px;background:rgba(243,246,248,.94);padding:8px 0;backdrop-filter:blur(8px)}}
-@media(max-width:420px){.brand-sub{font-size:9px}.brand-mark{width:34px;height:34px}.topbar{gap:8px}.choice-row{display:grid;grid-template-columns:1fr}.choice{width:100%;text-align:left}.page-count{font-size:10px}}
+:root{--navy:#10263b;--navy2:#17364f;--navy3:#244b65;--teal:#2bb7a5;--teal-soft:#e8f7f4;--ink:#1d3345;--muted:#718596;--line:#dbe5eb;--paper:#f2f6f8;--white:#fff;--shadow:0 18px 48px rgba(16,38,59,.12)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--paper)}button{font:inherit;cursor:pointer}
+.topbar{height:76px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,44px);box-shadow:0 4px 18px rgba(16,38,59,.16)}
+.brand{display:flex;align-items:center;gap:12px}.mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#39c5b2,#167e83);display:grid;place-items:center;font-weight:900;letter-spacing:-1px}.brand-name{font-size:17px;font-weight:800;line-height:1.15}.brand-sub{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#a9bfce;margin-top:4px}
+.reset{border:1px solid #58758a;color:#fff;background:#1b3b54;border-radius:10px;padding:10px 14px;font-size:12px;font-weight:800}.reset:hover{background:#294e68}
+main{width:min(900px,calc(100% - 32px));margin:38px auto 56px}.intro{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:0 4px 18px}.eyebrow{font-size:10px;letter-spacing:1.7px;text-transform:uppercase;color:#718696;font-weight:850}.intro h1{font-size:26px;letter-spacing:-.6px;color:var(--navy);margin:5px 0 0}.step-chip{white-space:nowrap;border:1px solid var(--line);background:#fff;color:#557083;padding:7px 11px;border-radius:30px;font-size:11px;font-weight:750}
+.progress{height:5px;background:#dce6eb;border-radius:20px;overflow:hidden;margin:0 4px 22px}.progress-fill{height:100%;width:0;background:var(--teal);border-radius:20px;transition:width .2s ease}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}.card-top{padding:18px 24px 14px;border-bottom:1px solid #edf1f4;display:flex;align-items:center;justify-content:space-between;gap:12px}.stage{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#6b8495;font-weight:850}.speaker{border-radius:6px;background:#e6f6f2;color:#14766c;padding:5px 8px;font-size:9px;letter-spacing:1px;font-weight:900}
+.script-body{padding:clamp(24px,5vw,48px);min-height:260px;display:flex;flex-direction:column;justify-content:center}.prompt{font-size:clamp(20px,3vw,27px);line-height:1.55;letter-spacing:-.35px;color:#18344a;font-weight:560;white-space:pre-line}.client-line{border-left:3px solid #9eafba;background:#f5f8fa;padding:12px 15px;border-radius:0 9px 9px 0;margin-top:24px;color:#62798a;font-size:14px}.client-line b{display:block;font-size:9px;letter-spacing:1.2px;color:#8295a2;margin-bottom:4px}
+.actions{padding:20px 24px 24px;background:#f8fafb;border-top:1px solid #edf1f4}.action-label{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;font-weight:850;color:#78909f;margin:0 0 11px}.choices{display:flex;flex-wrap:wrap;gap:10px}.choice{min-height:46px;padding:11px 17px;border:1px solid #cbd9e1;background:#fff;color:#24465d;border-radius:10px;font-size:13px;font-weight:800;transition:.15s}.choice:hover{border-color:var(--teal);background:#eef9f7;transform:translateY(-1px)}.choice.primary{background:var(--navy);color:#fff;border-color:var(--navy)}.choice.primary:hover{background:#204761}.choice.positive{border-color:#a9dcd2;background:#eff9f6;color:#176c61}.choice.warning{border-color:#e3d3b2;background:#fffaf0;color:#72541e}
+.footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:15px}.back{border:1px solid #cbd9e1;background:#fff;color:#37566b;border-radius:9px;padding:10px 15px;font-size:12px;font-weight:800}.back:disabled{opacity:.35;cursor:not-allowed}.hint{font-size:11px;color:#8294a0;text-align:right}
+.done{text-align:center;padding:34px 22px 38px}.done-icon{width:48px;height:48px;border-radius:50%;background:var(--teal-soft);color:#138477;display:grid;place-items:center;font-size:24px;font-weight:900;margin:0 auto 14px}.done h2{margin:0;color:var(--navy);font-size:23px}.done p{margin:8px 0 22px;color:#728696;font-size:13px}.hidden{display:none!important}
+@media(max-width:600px){.topbar{height:68px;padding:0 14px}.mark{width:35px;height:35px}.brand-name{font-size:15px}.reset{padding:9px 10px;font-size:11px}main{margin:24px auto 32px}.intro h1{font-size:22px}.intro{align-items:start;flex-direction:column;gap:8px}.step-chip{align-self:flex-start}.card{border-radius:15px}.card-top{padding:15px 17px}.script-body{min-height:230px;padding:25px 20px}.prompt{font-size:21px}.actions{padding:17px}.choices{display:grid;grid-template-columns:1fr}.choice{width:100%;text-align:left}.footer{position:sticky;bottom:8px;background:rgba(242,246,248,.95);padding:8px 0;backdrop-filter:blur(8px)}.hint{max-width:65%}}
 </style>
 </head>
 <body>
 <header class="topbar">
-  <div class="brand"><div class="brand-mark">RR</div><div><div class="brand-title">Rapid Relief</div><div class="brand-sub">Interactive Call Script</div></div></div>
-  <div class="top-actions"><button class="reset" id="resetCall" type="button">↺ Start New Call</button></div>
+  <div class="brand"><div class="mark">RR</div><div><div class="brand-name">Rapid Relief</div><div class="brand-sub">Guided Interactive Script</div></div></div>
+  <button class="reset" id="resetCall" type="button">↺ Start New Call</button>
 </header>
-<div class="shell">
-  <aside class="sidebar">
-    <div class="side-label">Call sections</div>
-    <nav aria-label="Script sections">
-      <button class="nav-btn active" data-panel="opening"><span class="num">01</span> Opening & Verification</button>
-      <button class="nav-btn" data-panel="disability"><span class="num">02</span> Disability Screening</button>
-      <button class="nav-btn" data-panel="debt"><span class="num">03</span> Debt / Tax Script</button>
-      <button class="nav-btn" data-panel="ttw"><span class="num">04</span> Ticket to Work</button>
-    </nav>
-    <div class="sidebar-note">Select a section or follow the call paths in the script.</div>
-  </aside>
-  <main class="content">
-    <div class="page-head"><div><div class="eyebrow">Rapid Relief · Agent Script</div><h1 id="pageTitle">Opening & Verification</h1></div><div class="page-count" id="pageCount">Section 1 of 4</div></div>
-
-    <section class="panel active" id="opening" aria-label="Opening and verification">
-      <div class="script-card">
-        <h2>Opening</h2>
-        <div class="script-line agent"><span class="speaker">AGENT</span><p>Hi! Am I speaking with (Client Name)?</p></div>
-        <div class="script-line client"><span class="speaker">CLIENT</span><p>Yes.</p></div>
-        <div class="script-line agent"><span class="speaker">AGENT</span><p>Wonderful! Hi, (Client Name)! Can you hear me clearly on your end?</p></div>
-        <div class="script-line client"><span class="speaker">CLIENT</span><p>Yes.</p></div>
-        <div class="script-line agent"><span class="speaker">AGENT</span><p>Perfect! Thank you. My name is (Agent Name), and I'm calling from Rapid Relief.</p></div>
-        <div class="script-line agent"><p>The reason I'm reaching out today is regarding your pending benefits review. I'm following up to help ensure that the information associated with your file is accurate. I just need to ask you to confirm some information for me to ensure that nothing gets overlooked and that you receive the benefits you are entitled to.</p></div>
-      </div>
-      <div class="script-card">
-        <h2>Confirm Information</h2>
-        <div class="script-line agent"><p>Let’s begin with your state.</p></div>
-        <div class="script-line agent"><p>You are in ( state) is this correct?</p></div>
-        <div class="script-line agent"><p>In case we get disconnected I have this number ( phone ) on file.</p></div>
-        <div class="script-line agent"><p>Do you want us to call you on this number or is there any other number you want us to add on your file?</p></div>
-        <div class="script-line agent"><p>Great! And I have your age as ( age), is that correct?</p></div>
-        <div class="script-line agent"><p>Ok, Are you currently working or receiving any Social Security Disability or Income benefits?</p></div>
-      </div>
-      <div class="branch-box">
-        <div class="branch-title">IF ALREADY HAS SSDI / IF WORKING</div>
-        <div class="choice-row">
-          <button class="choice primary" data-go="ttw">Already has SSDI — Proceed to TTW</button>
-          <button class="choice" data-go="debt">Full time working — Proceed to debt SCRIPT</button>
-          <button class="choice" data-go="disability">Working part time — Continue screening</button>
-          <button class="choice" data-go="disability">Not working — Continue screening</button>
-        </div>
-      </div>
-      <div class="section-footer"><button class="footer-btn" disabled>← Previous</button><button class="footer-btn next" data-next="disability">Next: Disability Screening →</button></div>
-    </section>
-
-    <section class="panel" id="disability" aria-label="Disability screening">
-      <div class="script-card">
-        <h2>Disability Screening</h2>
-        <div class="script-line agent"><p>WORKING PART TIME or NOT WORKING: Are you restricted in any way from working due to a disability?</p></div>
-        <div class="branch-box">
-          <div class="branch-title">IF PART-TIME / NOT WORKING</div>
-          <div class="choice-row">
-            <button class="choice" data-reveal="parttime">Part-timer says YES</button>
-            <button class="choice" data-reveal="notworking">Not working says YES</button>
-          </div>
-          <div class="reveal" id="parttime"><p>Do you make less than $1700 monthly?</p></div>
-          <div class="reveal" id="notworking"><p>Ok, no worries, we will take care of that. You are a great candidate for up to $4100 Disability Benefit.</p></div>
-        </div>
-        <div class="script-line agent"><p>Have you ever applied for or have any pending disability claim?</p></div>
-        <div class="branch-box">
-          <div class="branch-title">IF YES / IF NO</div>
-          <div class="choice-row">
-            <button class="choice" data-reveal="pendingYes">YES — Proceed to DEBT SCRIPT</button>
-            <button class="choice" data-reveal="pendingNo">NO — Proceed to Screening</button>
-          </div>
-          <div class="reveal" id="pendingYes"><p>That is good to know. While waiting for that to be approved, let’s see if there are relief programs that can help lower your monthly expenses for now. Then proceed to DEBT SCRIPT.</p><button class="route-link" data-go="debt">Go to Debt / Tax Script →</button></div>
-          <div class="reveal" id="pendingNo"><p>Proceed to Screening</p><div class="script-line agent"><p>Have you seen a doctor in the past 12 months for any of these conditions?</p></div><div class="choice-row"><button class="choice" data-reveal="doctorYes">If yes — Proceed to Screening</button><button class="choice" data-reveal="doctorNo">If No — Procced to Debt Script</button></div><div class="reveal" id="doctorYes"><p>Proceed to Screening</p><div class="script-line agent"><p>Ok, we are down to the last few questions, have you worked full time for at least 5 out of the last 10 years?</p></div><div class="choice-row"><button class="choice" data-reveal="workYes">YES — Proceed to Screening</button><button class="choice" data-reveal="workNo">NO — GO to DEBT SCRIPT</button></div><div class="reveal" id="workYes"><div class="script-line agent"><p>What year were you last employed?</p></div><div class="script-line agent"><p>What kind of work did you do then?</p></div><div class="script-line agent"><p>PRE TRANSFER- ( Client name) I have great news ! Based on your current situation, you have an excellent case to qualify for disability benefits of up to $4100 per month. I will transfer you over to the case manager so we can get your benefits moving. Please hold while I connect you with a case manager.</p></div><div class="script-line agent"><p>HAND OFF: Hi , I have ( client name) on the line and he/she has been prequalified for the SSDI Program. Kindly take it from here.</p></div></div><div class="reveal" id="workNo"><p>GO to DEBT SCRIPT</p><button class="route-link" data-go="debt">Go to Debt / Tax Script →</button></div></div><div class="reveal" id="doctorNo"><p>Procced to Debt Script</p><button class="route-link" data-go="debt">Go to Debt / Tax Script →</button></div></div>
-        </div>
-      </div>
-      <div class="section-footer"><button class="footer-btn" data-prev="opening">← Previous</button><button class="footer-btn next" data-next="debt">Next: Debt / Tax Script →</button></div>
-    </section>
-
-    <section class="panel" id="debt" aria-label="Debt and tax script">
-      <div class="script-card">
-        <h2>DEBT/ TAX SCRIPT</h2>
-        <div class="script-line agent"><p>No worries, there are relief programs available to help lower your monthly expenses.</p></div>
-        <div class="script-line agent"><p>Let me just confirm:</p></div>
-        <div class="script-line agent"><p>How much debts from tax, credit card and personal loans are you struggling to pay?</p></div>
-        <div class="branch-box">
-          <div class="branch-title">SELECT THE APPLICABLE SCRIPT</div>
-          <div class="choice-row">
-            <button class="choice" data-reveal="qualifiedDebt">If they have QUALIFIED DEBT AMOUNT</button>
-            <button class="choice" data-reveal="taxDebt">IF they have TAX DEBT</button>
-          </div>
-          <div class="reveal" id="qualifiedDebt"><p>Ok. The good news is based on your zip code and the information we have on file, you may qualify for debt relief program that can lower your monthly payment or eliminate these debts depending on your eligibility.</p></div>
-          <div class="reveal" id="taxDebt"><p>Ok. The good news is based on your zip code and the information we have on file, you may be eligible for possible tax deductions, credits, refunds or exemptions that you may have missed.</p></div>
-        </div>
-        <div class="script-line agent"><p>PRE TRANSFER:I can connect you with a senior agent who can explain the program and check your eligibility. Would it be okay to place you on a brief hold while I transfer your call?</p></div>
-        <div class="script-line agent"><p>HAND OFF:</p></div>
-        <div class="script-line agent"><p>Hi ! I have ( first name ) on the line and he/she is interested in the program. Kindly take if from here.</p></div>
-      </div>
-      <div class="section-footer"><button class="footer-btn" data-prev="disability">← Previous</button><button class="footer-btn next" data-next="ttw">Next: Ticket to Work →</button></div>
-    </section>
-
-    <section class="panel" id="ttw" aria-label="Ticket to Work">
-      <div class="script-card">
-        <h2>TICKET TO WORK</h2>
-        <div class="script-line agent"><p>That is good to know. Is the income you are receiving from SSDI enough for your monthly needs?</p></div>
-        <div class="branch-box">
-          <div class="branch-title">SELECT THE CLIENT'S ANSWER</div>
-          <div class="choice-row">
-            <button class="choice" data-reveal="incomeEnough">IF INCOME IS ENOUGH</button>
-            <button class="choice" data-reveal="incomeNotEnough">IF INCOME NOT ENOUGH</button>
-          </div>
-          <div class="reveal" id="incomeEnough">
-            <p>that’s good to know! However if there is a program that can help you return to work without risking your monthly SSDI benefits? Would you be interested to learn more ?</p>
-            <div class="choice-row"><button class="choice" data-reveal="ttwInterested">Interested</button><button class="choice" data-reveal="ttwNotInterested">Not Interested — Go to Debt Script</button></div>
-            <div class="reveal" id="ttwInterested"><p>Perfect, I will put you on quick hold as I transfer you over.</p></div>
-            <div class="reveal" id="ttwNotInterested"><p>Go to Debt Script</p><button class="route-link" data-go="debt">Go to Debt / Tax Script →</button></div>
-          </div>
-          <div class="reveal" id="incomeNotEnough"><p>I feel you. But, (Client name), the great news is that , there is a program that can help you return to work without risking your monthly SSDI benefits to allow you earn a little bit more to cover your monthly needs. I can quickly transfer you to the specialist and they can walk you through the program. Is it ok if I put you on hold as I transfer you over?</p></div>
-        </div>
-      </div>
-      <div class="section-footer"><button class="footer-btn" data-prev="debt">← Previous</button><button class="footer-btn next" id="finishCall">Start New Call ↺</button></div>
-    </section>
-  </main>
-</div>
+<main>
+  <div class="intro">
+    <div><div class="eyebrow">Agent call flow</div><h1 id="pageTitle">Opening & Verification</h1></div>
+    <div class="step-chip" id="stepChip">Opening · Step 1</div>
+  </div>
+  <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+  <section class="card" id="scriptCard" aria-live="polite">
+    <div class="card-top"><div class="stage" id="stageName">Opening & Verification</div><div class="speaker" id="speaker">AGENT</div></div>
+    <div class="script-body"><div class="prompt" id="promptText"></div><div class="client-line hidden" id="clientLine"><b>CLIENT</b><span id="clientText"></span></div></div>
+    <div class="actions"><div class="action-label" id="actionLabel">Select the client's response</div><div class="choices" id="choices"></div></div>
+  </section>
+  <section class="card done hidden" id="doneCard" aria-live="polite">
+    <div class="done-icon">✓</div><h2 id="doneTitle">Transfer Script</h2><p id="doneText">The current script portion is complete.</p><button class="choice primary" id="doneReset" type="button">Start New Call</button>
+  </section>
+  <div class="footer"><button class="back" id="backButton" type="button" disabled>← Previous</button><div class="hint">Only the current screening prompt is shown.</div></div>
+</main>
 <script>
 (function(){
-  const root=document.documentElement;
-  root.classList.remove('no-js');
-  const ids=['opening','disability','debt','ttw'];
-  const titles={'opening':'Opening & Verification','disability':'Disability Screening','debt':'Debt / Tax Script','ttw':'Ticket to Work'};
-  let current='opening';
-  function showPanel(id){if(!ids.includes(id))return;current=id;document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.panel===id));document.getElementById('pageTitle').textContent=titles[id];document.getElementById('pageCount').textContent='Section '+(ids.indexOf(id)+1)+' of '+ids.length;window.scrollTo({top:0,behavior:'smooth'});}
-  function resetReveals(){document.querySelectorAll('.reveal').forEach(el=>el.style.display='none');}
-  document.querySelectorAll('[data-panel]').forEach(b=>b.addEventListener('click',()=>showPanel(b.dataset.panel)));
-  document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>showPanel(b.dataset.next)));
-  document.querySelectorAll('[data-prev]').forEach(b=>b.addEventListener('click',()=>showPanel(b.dataset.prev)));
-  document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>showPanel(b.dataset.go)));
-  document.querySelectorAll('[data-reveal]').forEach(b=>b.addEventListener('click',()=>{const target=document.getElementById(b.dataset.reveal);if(!target)return;const was=target.style.display==='block';target.style.display=was?'none':'block';if(!was)target.scrollIntoView({behavior:'smooth',block:'nearest'});}));
-  function resetCall(){resetReveals();showPanel('opening');}
-  document.getElementById('resetCall').addEventListener('click',resetCall);
-  document.getElementById('finishCall').addEventListener('click',resetCall);
+  const steps={
+    name:{stage:'Opening & Verification',title:'Opening & Verification',speaker:'AGENT',text:'Hi! Am I speaking with (Client Name)?',client:'Yes.',actions:[['Client says Yes','hear','primary']]},
+    hear:{stage:'Opening & Verification',title:'Opening & Verification',speaker:'AGENT',text:'Wonderful! Hi, (Client Name)! Can you hear me clearly on your end?',client:'Yes.',actions:[['Client says Yes','intro','primary']]},
+    intro:{stage:'Opening & Verification',title:'Opening & Verification',text:"Perfect! Thank you. My name is (Agent Name), and I'm calling from Rapid Relief.",next:'introReason'},
+    introReason:{stage:'Opening & Verification',title:'Opening & Verification',text:"I understand you are trying to explore financial hardship assistance and available resources for you and your family.\n\nThere are government programs and assistance that are available in your area. I just need to verify some information before I transfer you over to your case manager who will assist in checking your eligibility for the monthly assistance program of up to $4100.\n\nLet’s begin with your state.",next:'state'},
+    state:{stage:'Opening & Verification',title:'Opening & Verification',text:'You are in ( state) is this correct?',next:'phone'},
+    phone:{stage:'Opening & Verification',title:'Opening & Verification',text:'In case we get disconnected I have this number ( phone ) on file.',next:'phoneConfirm'},
+    phoneConfirm:{stage:'Opening & Verification',title:'Opening & Verification',text:'Do you want us to call you on this number or is there any other number you want us to add on your file?',next:'age'},
+    age:{stage:'Opening & Verification',title:'Opening & Verification',text:'Great! And I have your age as ( age), is that correct?',next:'status'},
+    status:{stage:'Opening & Verification',title:'Opening & Verification',text:'Ok, Are you currently working or receiving any Social Security Disability or Income benefits?',actions:[['Already has SSDI — Proceed to TTW','ttw','primary'],['Working','workType'],['Not working','disabilityCheck']]},
+    workType:{stage:'Opening & Verification',title:'Opening & Verification',text:'IF WORKING: Are you currently working full time or part-time?',actions:[['Full time working — Proceed to Debt Script','debtIntro','primary'],['Part-time working','partTimeRestricted'],['Not working','notWorkingRestricted']]},
+    partTimeRestricted:{stage:'Disability Screening',title:'Disability Screening',text:'WORKING PART TIME or NOT WORKING: Are you restricted in any way from working due to a disability?',actions:[['YES','partTimeIncome','primary'],['NO — Continue','pendingClaim']]},
+    notWorkingRestricted:{stage:'Disability Screening',title:'Disability Screening',text:'WORKING PART TIME or NOT WORKING: Are you restricted in any way from working due to a disability?',actions:[['YES','notWorkingIncome','primary'],['NO — Continue','pendingClaim']]},
+    partTimeIncome:{stage:'Disability Screening',title:'Disability Screening',text:'Are you making $1,700 or less monthly?',actions:[['$1,700 or less — Proceed to Screening','pendingClaim','primary'],['More than $1,700 — Proceed to Debt','debtIntro']]},
+    notWorkingIncome:{stage:'Disability Screening',title:'Disability Screening',text:'Are you making $1,700 or less monthly?',actions:[['$1,700 or less — Proceed to Screening','notWorkingLine','primary'],['More than $1,700 — Proceed to Debt','debtIntro']]},
+    notWorkingLine:{stage:'Disability Screening',title:'Disability Screening',text:'Ok, no worries, we will take care of that. You are a great candidate for up to $4100 Disability Benefit.',next:'pendingClaim'},
+    pendingClaim:{stage:'Disability Screening',title:'Disability Screening',text:'Have you ever applied for or have any pending disability claim?',actions:[['YES','pendingYes','primary'],['NO','doctorScreen']]},
+    pendingYes:{stage:'Disability Screening',title:'Disability Screening',text:'That is good to know. While waiting for that to be approved, let’s see if there are relief programs that can help lower your monthly expenses for now. Then proceed to DEBT SCRIPT.',next:'debtIntro'},
+    doctorScreen:{stage:'Disability Screening',title:'Disability Screening',text:'Have you seen a doctor in the past 12 months for any of these conditions?',actions:[['If yes — Proceed to Screening','workHistory','primary'],['If No — Proceed to Debt Script','debtIntro']]},
+    workHistory:{stage:'Disability Screening',title:'Disability Screening',text:'Ok, we are down to the last few questions, have you worked full time for at least 5 out of the last 10 years?',actions:[['YES — Proceed to Screening','lastYear','primary'],['NO — GO to DEBT SCRIPT','debtIntro']]},
+    lastYear:{stage:'Disability Screening',title:'Disability Screening',text:'What year were you last employed?',next:'workKind'},
+    workKind:{stage:'Disability Screening',title:'Disability Screening',text:'What kind of work did you do then?',next:'disabilityTransfer'},
+    disabilityTransfer:{stage:'Disability Screening',title:'Disability Screening',text:'( Client name) I have great news ! Based on your current situation, you have an excellent case to qualify for disability benefits of up to $4100 per month. I will transfer you over to the case manager so we can get your benefits moving. Please hold while I connect you with a case manager.',next:'disabilityHandoff'},
+    disabilityHandoff:{stage:'Disability Screening · Hand Off',title:'Disability Screening',text:'Hi , I have ( client name) on the line and he/she has been prequalified for the SSDI Program. Kindly take it from here.',finish:'Disability hand off'},
+    debtIntro:{stage:'Debt / Tax Script',title:'Debt / Tax Script',text:'No worries, there are relief programs available to help lower your monthly expenses.\n\nLet me just confirm:',next:'debtAmount'},
+    debtAmount:{stage:'Debt / Tax Script',title:'Debt / Tax Script',text:'How much debts from tax, credit card and personal loans are you struggling to pay?',actions:[['Qualified debt amount','qualifiedDebt','primary'],['Tax debt','taxDebt']]},
+    qualifiedDebt:{stage:'Debt / Tax Script',title:'Debt / Tax Script',text:'Ok. The good news is based on your zip code and the information we have on file, you may qualify for debt relief program that can lower your monthly payment or eliminate these debts depending on your eligibility.',next:'debtPreTransfer'},
+    taxDebt:{stage:'Debt / Tax Script',title:'Debt / Tax Script',text:'Ok. The good news is based on your zip code and the information we have on file, you may be eligible for possible tax deductions, credits, refunds or exemptions that you may have missed.',next:'debtPreTransfer'},
+    debtPreTransfer:{stage:'Debt / Tax Script',title:'Debt / Tax Script',text:'I can connect you with a senior agent who can explain the program and check your eligibility. Would it be okay to place you on a brief hold while I transfer your call?',actions:[['Client agrees — Continue to hand off','debtHandoff','primary']]},
+    debtHandoff:{stage:'Debt / Tax Script · Hand Off',title:'Debt / Tax Script',text:'Hi ! I have ( first name ) on the line and he/she is interested in the program. Kindly take if from here.',finish:'Debt / Tax hand off'},
+    ttw:{stage:'Ticket to Work',title:'Ticket to Work',text:'That is good to know. Is the income you are receiving from SSDI enough for your monthly needs?',actions:[['IF INCOME IS ENOUGH','incomeEnough','primary'],['IF INCOME NOT ENOUGH','incomeNotEnough']]},
+    incomeEnough:{stage:'Ticket to Work',title:'Ticket to Work',text:'that’s good to know! However if there is a program that can help you return to work without risking your monthly SSDI benefits? Would you be interested to learn more ?',actions:[['Interested','ttwInterested','primary'],['Not Interested — Go to Debt Script','debtIntro']]},
+    ttwInterested:{stage:'Ticket to Work',title:'Ticket to Work',text:'Perfect, I will put you on quick hold as I transfer you over.',finish:'Ticket to Work transfer'},
+    incomeNotEnough:{stage:'Ticket to Work',title:'Ticket to Work',text:'I feel you. But, (Client name), the great news is that , there is a program that can help you return to work without risking your monthly SSDI benefits to allow you earn a little bit more to cover your monthly needs. I can quickly transfer you to the specialist and they can walk you through the program. Is it ok if I put you on hold as I transfer you over?',finish:'Ticket to Work transfer'}
+  };
+  const order=Object.keys(steps);let current='name';let history=[];let visits=[];
+  const $=id=>document.getElementById(id);
+  function stageProgress(stage){const groups=['Opening & Verification','Disability Screening','Debt / Tax Script','Ticket to Work'];let idx=groups.indexOf(stage.split(' · ')[0]);return Math.max(1,idx+1)/groups.length*100;}
+  function render(id){current=id;const s=steps[id];if(!s)return; $('scriptCard').classList.remove('hidden');$('doneCard').classList.add('hidden');$('pageTitle').textContent=s.title;$('stepChip').textContent=s.stage+' · Step '+(visits.length+1);$('stageName').textContent=s.stage;$('speaker').textContent=s.speaker||'AGENT';$('promptText').textContent=s.text;
+    if(s.client){$('clientLine').classList.remove('hidden');$('clientText').textContent=s.client;}else{$('clientLine').classList.add('hidden');$('clientText').textContent='';}
+    const actions=$('choices');actions.innerHTML='';$('actionLabel').textContent=s.actions?"Select the client\'s response":"Continue to the next part";
+    if(s.actions){s.actions.forEach(([label,target,style])=>{const b=document.createElement('button');b.type='button';b.className='choice '+(style||'');b.textContent=label;b.addEventListener('click',()=>go(target));actions.appendChild(b);});}
+    else if(s.next){const b=document.createElement('button');b.type='button';b.className='choice primary';b.textContent='Continue →';b.addEventListener('click',()=>go(s.next));actions.appendChild(b);}
+    else if(s.finish){const b=document.createElement('button');b.type='button';b.className='choice primary';b.textContent='Finish Call';b.addEventListener('click',()=>finish(s.finish));actions.appendChild(b);}
+    $('progressFill').style.width=stageProgress(s.stage)+'%';$('backButton').disabled=history.length===0;window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function go(id){if(!steps[id])return;history.push(current);visits.push(id);render(id);}
+  function back(){if(!history.length)return;const prev=history.pop();if(visits.length)visits.pop();render(prev);}
+  function finish(label){$('scriptCard').classList.add('hidden');$('doneCard').classList.remove('hidden');$('doneTitle').textContent=label;$('doneText').textContent='';$('pageTitle').textContent=label;$('stepChip').textContent='Call flow complete';$('progressFill').style.width='100%';$('backButton').disabled=history.length===0;window.scrollTo({top:0,behavior:'smooth'});}
+  function reset(){history=[];visits=[];render('name');}
+  $('backButton').addEventListener('click',back);$('resetCall').addEventListener('click',reset);$('doneReset').addEventListener('click',reset);render('name');
 })();
 </script>
 </body>
