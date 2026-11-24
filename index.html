@@ -79,7 +79,7 @@ main{width:min(900px,calc(100% - 32px));margin:38px auto 56px}.intro{display:fle
     ttwDebtCheckNotEnough:{stage:'Ticket to Work · Debt Check',title:'Ticket to Work',text:'Do you currently have any unpaid taxes or unsecured debts that you are struggling to pay?',actions:[['YES — Proceed to Debt or Tax','debtIntro','primary'],['NO — Continue Ticket to Work','ttwNoDebtNotEnough']]},
     ttwNoDebtNotEnough:{stage:'Ticket to Work',title:'Ticket to Work',text:'I have great news for you, (CLIENT NAME). There is a program that can help you return to work without risking your monthly SSDI benefits. This can allow you to earn a little bit more to cover your monthly needs. I can quickly transfer you to the specialist and they can walk you through the program. Is it ok if I put you on hold as I transfer you over?',actions:[['YES — Transfer to specialist','ttwInterested','primary'],['NO — End Ticket to Work flow','ttwDeclined']]},
     ttwInterested:{stage:'Ticket to Work',title:'Ticket to Work',text:'Perfect, I will put you on quick hold as I transfer you over.',finish:'Ticket to Work transfer'},
-    ttwDeclined:{stage:'Ticket to Work',title:'Ticket to Work',speaker:'STATUS',text:'Ticket to Work not accepted.',finish:'Ticket to Work declined'}
+    ttwDeclined:{stage:'Ticket to Work',title:'Ticket to Work',speaker:'STATUS',text:'No worries. As of now there are no other programs that we can offer. However if something new comes up. We will definitely give you a call back. Thank you and have a great day!',finish:'Ticket to Work declined'}
   };
   const order=Object.keys(steps);let current='name';let history=[];let visits=[];
   const $=id=>document.getElementById(id);
